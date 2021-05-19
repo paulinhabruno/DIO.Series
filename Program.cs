@@ -22,7 +22,7 @@ namespace DIO.Series
                    InserirSerie();
                    break;
                    case "3":
-                   //AtualizarSerie();
+                   AtualizarSerie();
                    break;
                    case "4":
                    //ExcluirSerie();
@@ -41,6 +41,39 @@ namespace DIO.Series
            Console.WriteLine("Obrigado por utilizar os nossos serviço.");
            Console.ReadLine();
         }
+
+// Atualizar série
+
+        private static void AtualizarSerie()
+        {
+            Console.WriteLine("Digite o ID da Série: ");
+            int indiceSerie = int.Parse(Console.ReadLine());
+
+            foreach(int i in Enum.GetValues(typeof(Genero)))
+            {
+                Console.WriteLine("{0} - {1}", i, Enum.GetName(typeof(Genero), i));
+            }
+            Console.WriteLine("Digite o gênero entre as opções acima: ");
+            int entradaGenero = int.Parse(Console.ReadLine());
+            
+            Console.WriteLine("Digite o Título da Série: ");
+            string entradaTitulo = Console.ReadLine();
+
+            Console.WriteLine("Digite o ano de início da Série: ");
+            int entradaAno = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Digite a Descrição da Série: ");
+            string entradaDescricao = Console.ReadLine();
+
+            Serie atualizarSerie = new Serie(id: indiceSerie,
+                                        genero: (Genero)entradaGenero,
+                                        titulo: entradaTitulo,
+                                        ano: entradaAno,
+                                        descricao: entradaDescricao);
+                                        
+            repositorio.Atualiza(indiceSerie, atualizarSerie);
+        }
+
 // listando as séries
         private static void ListarSeries()
         {
@@ -67,8 +100,10 @@ namespace DIO.Series
             Console.WriteLine("Inserir nova série");
 
             foreach (int i in Enum.GetValues(typeof(Genero)))
+                                    // está acessando a lista dos gêneros
             {
-                Console.WriteLine("{0} - {1}", i, Enum.GetName(typeof(Genero), i));
+                Console.WriteLine("{0} - {1}", i, Enum.GetName(typeof(Genero), i)); 
+                                                    //retorna o gênero com valor i
             }
             Console.WriteLine("Digite o gênero entre as opções acima: ");
             int entradaGenero = int.Parse(Console.ReadLine());
